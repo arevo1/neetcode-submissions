@@ -1,0 +1,17 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+
+        def backtrack(current: str, opened: int, closed: int) -> None:
+            if len(current) == 2 * n:
+                result.append(current.copy())
+                return
+
+            if opened < n:
+                backtrack(current + "(", opened + 1, closed)
+
+            if closed < opened:
+                backtrack(current + ")", opened, closed + 1)
+
+        backtrack("", 0, 0)
+        return result
